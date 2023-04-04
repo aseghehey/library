@@ -5,10 +5,23 @@
   --shadow: rgba(0, 0, 0, 0.22) 0px 1px 4px;
   --active: #7AA874;
   --unactive: #DF2E38;
+  --secondary-color: #393E46;
+  --main-width: 1000px;
+  --spacing-xl: 40px;
+  --spacing-lg: 30px;
+  --spacing-md: 20px;
+  --spacing-sm: 10px;
+  --spacing-xs: 5px;
 }
 
 * {
   font-family: 'Heebo', sans-serif;
+}
+
+.main-container {
+  max-width: var(--main-width);
+  padding: var(--spacing-lg);
+  /* margin: 0 auto; */
 }
 
 body {
@@ -29,16 +42,15 @@ input:valid {
 }
 
 .book:hover, .book:focus {
-  border: 1px solid #393E46;
+  border: 2px solid var(--secondary-color);
   /* color: white; */
 }
 
 .header {
   display: flex;  
   box-shadow: var(--shadow);
-  padding: 20px;
-  height: 50px;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .book > h2 {
@@ -78,12 +90,11 @@ p {
 }
 
 .modal {
-  border: 1px solid #ddd;
   border-radius: 15px;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
-  padding: 20px;
+  padding: var(--spacing-lg);
   width: 400px;
   margin: auto;
   z-index: 2;
@@ -118,7 +129,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 10px;
+  gap: var(--spacing-xs);
 }
 
 .hidden {
@@ -126,22 +137,19 @@ p {
 }
 
 .library {
-  margin: 50px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
 }
 
 .book {
   display: flex;
   flex-direction: column;
   text-align: center;
-  padding: 20px;
-  /* transition: all 0.1s ease-in; */
-  /* align-items: center; */
-  gap: 5px;
-  width: 250px;
+  font-size: 1em;
+  padding: var(--spacing-md);
+  gap: var(--spacing-xs);
   border-radius: 10px;
   box-shadow: var(--shadow);
 }
@@ -164,4 +172,16 @@ input {
     border: 1px solid #222831;
     border-radius: 5px;
     font-size: 0.9rem;
+}
+
+@media (max-width: 400px) {
+  .header, .main-container {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding-top: var(--spacing-md);
+  }
+
+  :root {
+    --spacing-xl: 20px;
+  }
 }

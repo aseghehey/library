@@ -44,7 +44,6 @@ class Library {
     return this.library.find((book) => book.title === title);
   }
 }
-
 const library = new Library();
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
@@ -62,10 +61,6 @@ function closeModal() {
   modal.classList.add("hidden");
 }
 
-function resetForm(formArray) {
-  formArray.forEach((input) => (input.value = ""));
-}
-
 const resetLibrary = () => {
   books.innerHTML = "";
 };
@@ -73,21 +68,28 @@ const resetLibrary = () => {
 const displayBook = (book) => {
   const bookDiv = document.createElement("div");
   bookDiv.classList.add("book");
+
   const title = document.createElement("h2");
   const author = document.createElement("p");
   const numPage = document.createElement("p");
   const readBtn = document.createElement("button");
   const removeBtn = document.createElement("button");
+
   removeBtn.classList.add("btn");
   removeBtn.classList.add("btn-remove");
   const readBtnClass = book.hasRead ? "btn-read" : "btn-not-read";
-  readBtn.textContent = "Read Status";
   readBtn.classList.add(`${readBtnClass}`);
   readBtn.classList.add("btn");
+
+  readBtn.textContent = book.hasRead ? "Read" : "Not Read";
   title.textContent = book.title;
   author.textContent = book.author;
   numPage.textContent = `${book.numPages} pages`;
   removeBtn.textContent = "Remove";
+
+  readBtn.onclick = updateRead;
+  removeBtn.onclick = removeBook;
+
   bookDiv.appendChild(title);
   bookDiv.appendChild(author);
   bookDiv.appendChild(numPage);
@@ -96,7 +98,7 @@ const displayBook = (book) => {
   books.appendChild(bookDiv);
 };
 
-const submitForm = (e) => {
+const addBookForm = (e) => {
   e.preventDefault();
   const title = bookForm.querySelector("#title");
   const author = bookForm.querySelector("#author");
@@ -104,47 +106,36 @@ const submitForm = (e) => {
   const cbx = bookForm.querySelector("#checkbox");
   library.addBook(title.value, author.value, np.value, cbx.checked);
   closeModal();
-  resetForm([title, author, np]);
+  bookForm.reset();
 };
 
-const modifyLibrary = (e) => {
-  // to toggle read or remove
-  const action = e.target;
-  const currentBookTitle = action.parentElement.children[0].textContent;
-  if (action.textContent == "Remove") {
-    // remove
-    resetLibrary();
-    library.removeBook(currentBookTitle);
-    for (let book of library.getBooks()) {
-      displayBook(book);
-    }
-  } else if (action.textContent == "Read Status") {
-    // toggle read
-    let removeBtnRead = false;
-    e.target.classList.forEach((className) => {
-      if (className === "btn-read") {
-        removeBtnRead = true;
-      }
-    });
+const updateRead = (e) => {
+  const title = e.target.parentElement.children[0].textContent;
+  library.updateBook(title);
+  resetLibrary();
+  populateLibrary();
+};
 
-    const classToAdd = removeBtnRead ? "btn-not-read" : "btn-read";
-    if (removeBtnRead) {
-      e.target.classList.remove("btn-read");
-    } else {
-      e.target.classList.remove("btn-not-read");
-    }
+const populateLibrary = () => {
+  for (let book of library.getBooks()) {
+    displayBook(book);
+  }
+};
 
-    e.target.classList.add(classToAdd);
-    library.updateBook(currentBookTitle);
+const removeBook = (e) => {
+  const currentBookTitle = e.target.parentElement.children[0].textContent;
+  resetLibrary();
+  library.removeBook(currentBookTitle);
+  populateLibrary();
+};
+
+const escapeModal = (e) => {
+  if (e.key == "Escape") {
+    closeModal();
   }
 };
 
 addBookBtn.addEventListener("click", openModal);
 overlay.addEventListener("click", closeModal);
-bookForm.addEventListener("submit", submitForm);
-books.addEventListener("click", modifyLibrary);
-window.addEventListener("keydown", (e) => {
-  if (e.key == "Escape"){
-    closeModal();
-  }
-});
+bookForm.addEventListener("submit", addBookForm);
+window.addEventListener("keydown", escapeModal);

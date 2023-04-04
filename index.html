@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500&display=swap" rel="stylesheet">
     <script src="script.js" defer></script>
-    <title>Document</title>
+    <title>Book lib</title>
 </head>
 <body>
     <div class="header">
@@ -25,10 +25,10 @@
         <form class="book-form" id="form">
             <h2>Add new book</h2>
             <label for="title">Title <span>*</span></label>
-            <input type="text" name="title" id="title" minlength="5" maxlength="30" placeholder="The Hobbit" value=""
+            <input type="text" name="title" id="title" minlength="1" maxlength="30" placeholder="The Hobbit" value=""
                 required />
             <label for="author">Author <span>*</span></label>
-            <input type="text" name="author" id="author" minlength="5" maxlength="30" placeholder="JK Rowlin" value=""
+            <input type="text" name="author" id="author" minlength="1" maxlength="30" placeholder="JK Rowlin" value=""
                 required />
             <label for="pages">Pages <span>*</span></label>
             <input type="number" name="pages" id="pages" placeholder="100" min="0" value="" required />
@@ -37,5 +37,4 @@
         </form>
     </div>
 </body>
-
 </html>
