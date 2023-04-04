@@ -1,2 +1,2 @@
 # book-library
-@ https://aseghehey.github.io/book-library/
+@ https://aseghehey.github.io/library/
