@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <h1>Library</h1>
+        <button class="btn btn-open">Add book</button>
+    </div>
+    <div class="overlay hidden"></div>
+    <div class="main-container">
+        <div class="library"></div>
+        </div>
+    </div>
+    <div class="modal hidden">
+        <form class="book-form" id="form">
+            <h2>Add new book</h2>
+            <label for="title">Title <span>*</span></label>
+            <input type="text" name="title" id="title" minlength="5" maxlength="30" placeholder="The Hobbit" value=""
+                required />
+            <label for="author">Author <span>*</span></label>
+            <input type="text" name="author" id="author" minlength="5" maxlength="30" placeholder="JK Rowlin" value=""
+                required />
+            <label for="pages">Pages <span>*</span></label>
+            <input type="number" name="pages" id="pages" placeholder="100" min="0" value="" required />
+            <label id="cbxLabel">Have you read it? <input type="checkbox" name="checkbox" id="checkbox" /></label>
+            <button type="submit" class="btn btn-submit">Enter</button>
+        </form>
+    </div>
+</body>
+
+</html>
